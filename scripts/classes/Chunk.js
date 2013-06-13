@@ -2,6 +2,9 @@ Chunk.CHUNKSIZE = 16;
 
 
 function Chunk(x, y, z) {
+	this.x = x;
+	this.y = y;
+	this.z = z;
 	this.blocks = new Array();
 	for(var x = 0; x < Chunk.CHUNKSIZE; x++) {
 		this.blocks[x] = new Array();
