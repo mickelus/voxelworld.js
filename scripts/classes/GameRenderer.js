@@ -96,7 +96,7 @@ function GameRenderer() {
 					if(chunk.getBlock(x,y,z) != undefined) {
 						var type = chunk.getBlock(x,y,z).getType();
 						var color = GameRenderer.BlockColors[type];
-						var block = this.createVoxel(x-Chunk.CHUNKSIZE/2, y-Chunk.CHUNKSIZE, z-Chunk.CHUNKSIZE/2, color);
+						var block = this.createVoxel(chunk.x + x-Chunk.CHUNKSIZE/2, chunk.y + y-Chunk.CHUNKSIZE, chunk.z + z-Chunk.CHUNKSIZE/2, color);
 						scene.add(block);
 						//THREE.GeometryUtils.merge(chunkGeometry, block);
 					}
