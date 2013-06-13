@@ -5,7 +5,7 @@ GameRenderer.BlockColors[BlockTypes.DIRT] = 0xccaa99;
 
 
 function GameRenderer() {
-	
+	console.log("NEW RENDERER")
 	// basic setup
 	var scene = new THREE.Scene();
 	//var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -31,7 +31,7 @@ function GameRenderer() {
 		-32,
 		0, 50 );
 	camera.position.x = 20;
-	camera.position.y = 20;
+	camera.position.y = 25;
 	camera.position.z = 20;
 	camera.lookAt(new THREE.Vector3(0,0,0));
 	this.camera = camera;
@@ -89,22 +89,40 @@ function GameRenderer() {
 	 * Draws a chunk in the world
 	 */
 	this.drawChunk = function(chunk) {
-		console.log(chunk);
+		console.log("test")
+		var mergedGeometry;
 		for(var x = 0; x < Chunk.CHUNKSIZE; x++) {
 			for(var y = 0; y < Chunk.CHUNKSIZE; y++) {
 				for(var z = 0; z < Chunk.CHUNKSIZE; z++) {
 					if(chunk.getBlock(x,y,z) != undefined) {
 						var type = chunk.getBlock(x,y,z).getType();
 						var color = GameRenderer.BlockColors[type];
-						var block = this.createVoxel(x-Chunk.CHUNKSIZE/2, y-Chunk.CHUNKSIZE, z-Chunk.CHUNKSIZE/2, color);
+						console.log(x+chunk.x*Chunk.CHUNKSIZE,
+							y+chunk.y*Chunk.CHUNKSIZE,
+							z+chunk.z*Chunk.CHUNKSIZE);
+						var block = this.createVoxel(
+							x+chunk.x*Chunk.CHUNKSIZE,
+							y+chunk.y*Chunk.CHUNKSIZE,
+							z+chunk.z*Chunk.CHUNKSIZE,
+							color);
 						scene.add(block);
-						//THREE.GeometryUtils.merge(chunkGeometry, block);
+						/*if(mergedGeometry == undefined) {
+							mergedGeometry = block;
+						} else {
+							console.log("PRE")
+							console.log(mergedGeometry);
+							mergedGeometry = THREE.GeometryUtils.merge(mergedGeometry, block);
+							console.log("POST")
+							console.log(mergedGeometry);
+						}*/
+						
 					}
 					
 				}
 			}
 		}
 		//chunkGeometry.position = new THREE.Vector3(0,0,0);
+		//scene.add(mergedGeometry);
 	}
 	
 	return this;
