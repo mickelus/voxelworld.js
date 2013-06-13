@@ -8,6 +8,9 @@ document.onselectstart = function() {
 
 var renderer = new GameRenderer();
 renderer.beginRendering();
-var testChunk = new Chunk(0,0,0);
-renderer.drawChunk(testChunk);
+
+renderer.drawChunk(new Chunk(0,0,0));
+renderer.drawChunk(new Chunk(1,0,0));
+renderer.drawChunk(new Chunk(0,0,1));
+
 
