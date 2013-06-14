@@ -13,4 +13,3 @@ renderer.drawChunk(new Chunk(0,0,0));
 renderer.drawChunk(new Chunk(1,0,0));
 renderer.drawChunk(new Chunk(0,0,1));
 
-

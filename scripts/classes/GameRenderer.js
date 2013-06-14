@@ -38,9 +38,9 @@ function GameRenderer() {
 	
 	// let there be light!
 	var pointLight = new THREE.PointLight(0xFFFFFF);
-	pointLight.position.x = 30;
-	pointLight.position.y = 50;
-	pointLight.position.z = 40;
+	pointLight.position.x = 60;
+	pointLight.position.y = 80;
+	pointLight.position.z = 70;
 	scene.add(pointLight);
 	
 	
@@ -95,17 +95,14 @@ function GameRenderer() {
 			for(var y = 0; y < Chunk.CHUNKSIZE; y++) {
 				for(var z = 0; z < Chunk.CHUNKSIZE; z++) {
 					if(chunk.getBlock(x,y,z) != undefined) {
-						var type = chunk.getBlock(x,y,z).getType();
-						var color = GameRenderer.BlockColors[type];
-						console.log(x+chunk.x*Chunk.CHUNKSIZE,
-							y+chunk.y*Chunk.CHUNKSIZE,
-							z+chunk.z*Chunk.CHUNKSIZE);
-						var block = this.createVoxel(
+						scene.add(this.createVoxel(
 							x+chunk.x*Chunk.CHUNKSIZE,
 							y+chunk.y*Chunk.CHUNKSIZE,
 							z+chunk.z*Chunk.CHUNKSIZE,
-							color);
-						scene.add(block);
+							GameRenderer.BlockColors[
+								chunk.getBlock(x,y,z).getType()
+							]
+						));
 						/*if(mergedGeometry == undefined) {
 							mergedGeometry = block;
 						} else {
